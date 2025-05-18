@@ -1,9 +1,8 @@
-# app.py
-
 import streamlit as st
 import pandas as pd
 import joblib
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+import os
 
 st.set_page_config(
     page_title="Heart Disease Batch Tester",
@@ -11,9 +10,8 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-st.title("❤️ Heart Disease Model  Tester")
+st.title("❤️ Heart Disease Model Tester")
 st.markdown("""
-
 1. Load the saved KNN model and the saved StandardScaler.
 2. Predict on the entire dataset you upload.
 3. Display the overall accuracy, confusion matrix, and classification report.
@@ -27,16 +25,21 @@ def load_artifacts():
     """
     Load the trained KNN model and the StandardScaler from disk.
     """
+    BASE_DIR = os.path.dirname(__file__)
+
+    knn_model_path = os.path.join(BASE_DIR, "knn_model.pkl")
+    scaler_path = os.path.join(BASE_DIR, "scaler.pkl")
+
     try:
-        knn_model = joblib.load("knn_model.pkl")
+        knn_model = joblib.load(knn_model_path)
     except FileNotFoundError:
-        st.error("❌ Could not find 'knn_model.pkl'. Make sure it is in the same directory as this app.")
+        st.error(f"❌ Could not find 'knn_model.pkl' at {knn_model_path}")
         knn_model = None
 
     try:
-        scaler = joblib.load("scaler.pkl")
+        scaler = joblib.load(scaler_path)
     except FileNotFoundError:
-        st.error("❌ Could not find 'scaler.pkl'. Make sure it is in the same directory as this app.")
+        st.error(f"❌ Could not find 'scaler.pkl' at {scaler_path}")
         scaler = None
 
     return knn_model, scaler
