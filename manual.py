@@ -4,7 +4,7 @@ import pandas as pd
 
 # PAGE CONFIG
 st.set_page_config(
-    page_title="Heart Disease Model Tester",
+    page_title="Heart Disease Model prediction using KNN",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
@@ -99,8 +99,8 @@ div.stButton > button {
 """, unsafe_allow_html=True)
 
 # TITLE
-st.title("❤️ Heart Disease Model Tester")
-st.markdown("Enter manual values and get real-time prediction.")
+st.title("❤️ Heart Disease Model prediction using KNN")
+st.markdown("Enter  values and get real-time prediction.")
 
 # MANUAL INPUT FORM
 feature_names = [
@@ -112,7 +112,7 @@ with st.container():
     st.markdown('<div class="manual-input-container">', unsafe_allow_html=True)
 
     with st.form("manual_input_form"):
-        st.subheader("🧮 Manual Input")
+        st.subheader("🧮 Input")
 
         col1, col2 = st.columns(2)
 
